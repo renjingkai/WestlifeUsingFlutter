@@ -1,3 +1,5 @@
+// import 'dart:js';
+
 import 'package:awesome/detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'TabbarItem.dart';
 import 'package:flutter_banner_swiper/flutter_banner_swiper.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:flutter/services.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -24,7 +27,7 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        
+
         primarySwatch: Colors.red,
       ),
       // showPerformanceOverlay: true, // 开启
@@ -56,12 +59,87 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   int selectedIndex = 0;
+
+  var albumsTitleArray = [
+    {
+      'album': 'WESTLIFE',
+      'songs': [
+        'Swear It Again',
+        'If I Let You Go',
+        'Flying Without Wings',
+        'Fool Again',
+        'No No',
+         'I Dont Wanna Fight',
+         'Change The World',
+         'Moments',
+         'Seasons In The Sun',
+         'I Need You',
+         'Miss You',
+         'More Than Words',
+         'Open Your Heart',
+         'Try Again',
+         'What I Want Is What Ive Got',
+         'We Are One',
+         'Cant Lose What You Never Had'
+
+      ]
+    },
+    {'album': 'Coast to Coast','songs': [
+        'My Love',
+        'What Makes A Man',
+        'I Lay My Love On You',
+        'I Have A Dream (Remix)',
+        'Against All Odds (featuring Mariah Carey)',
+        'When Youre Looking Like That',
+        'Close',
+        'Somebody Needs You',
+        'Angels Wings',
+        'Soledad',
+        'Puzzle Of My Heart',
+        'Dreams Come True',
+        'No Place That Far',
+        'Close Your Eyes',
+        'You Make Me Feel',
+        'Loneliness Knows Me By Name',
+        'Fragile Heart',
+         'Every Little Thing You Do',
+         'Dont Get Me Wrong'
+      ]},
+    {'album': 'World of Our Own','songs':[
+      'Queen Of My Heart',
+      'Bop Bop Baby',
+      'I Cry',
+      'Uptown Girl (Radio Edit)',
+       'Why Do I Love You',
+       'I Wanna Grow Old With You',
+       'When Youre Looking Like That (Single Remix)',
+       'Evergreen',
+        'World Of Our Own ',
+        'To Be Loved',
+        'Drive (For All Time)',
+        'If Your Hearts Not In It',
+        'When You Come Around',
+        'Dont Say Its Too Late',
+        'Dont Let Me Go',
+        'Walk Away',
+         'Love Crime',
+         'Imaginary Diva',
+         'Angel (BONUS Bad Girls)',
+    ]},
+    {'album': 'Unbreakable'},
+    {'album': 'Turnaround'},
+    {'album': 'Allow Us To Be Frank'},
+    {'album': 'Face To Face'},
+  ];
+
+  
   var swiperImageArray = [
     'https://img.meituan.net/msmerchant/284c6c89e1a975d14bfb311b588772dc369418.jpg@600w_600h_1l',
     'https://img.meituan.net/msmerchant/3a373be670fd8db23d5c461d810b5407574589.jpg@600w_600h_1l',
     'https://img.meituan.net/msmerchant/2d7ab4b84febc3a932632d2d47be6b232610701.jpg@600w_600h_1l',
     'https://img.meituan.net/msmerchant/2879f36120fee49a96bc937789536c433359502.jpg@600w_600h_1l',
   ];
+
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -72,6 +150,50 @@ class _MyHomePageState extends State<MyHomePage> {
       _counter++;
     });
   }
+List<Widget> buildFoodCards(){
+  var songsWidget = <Widget>[];
+  var albumDict = albumsTitleArray[selectedIndex];
+  var songsArray = <String>[];
+  songsArray = albumDict['songs'];
+
+  
+  for (var i = 0; i < songsArray.length; i++) {
+    var songTitle = songsArray[i];
+   var widget = FoodCard(
+                                  title: songTitle,
+                                  imageURLString:
+                                      'https://img.meituan.net/msmerchant/158f48dfc20a3a94595c4fc6f96102ef3641038.jpg@600w_600h_1l',
+                                  priceString: '¥398',
+                                  starString: '⭐⭐⭐⭐⭐');
+       songsWidget.add(widget);                           
+  }
+  
+  return songsWidget;
+// print(songArray);
+
+
+}
+  List<Widget> buildAlbums() {
+    var albumsWidget = <Widget>[];
+
+    for (var i = 0; i < albumsTitleArray.length; i++) {
+      var albumDict = albumsTitleArray[i];
+      var albumTitle = albumDict['album'];
+      var widget = GestureDetector(
+        child: TabbarItem(
+            albumTitle, selectedIndex == i ? Colors.red : Colors.grey),
+        onTap: () {
+          setState(() {
+            selectedIndex = i;
+            buildFoodCards();
+          });
+        },
+      );
+
+      albumsWidget.add(widget);
+    }
+    return albumsWidget;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +203,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-  
+    
     var topTextContainer = Container(
       child: Text(
         "Simple way to find Tasty Food",
@@ -94,27 +216,24 @@ class _MyHomePageState extends State<MyHomePage> {
     );
 
     SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-    DeviceOrientation.landscapeLeft,
-    DeviceOrientation.landscapeRight
-  ]);
-
-
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight
+    ]);
+    
     return Scaffold(
       appBar: AppBar(title: Text('Cuisine')),
       drawer: Drawer(
         child: ListView(
-          
           padding: EdgeInsets.all(0),
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountName: Text('张亮Joejoe'),
-              accountEmail: Text('Joejoe@hotmail.com'),
+              accountName: Text('I ❤️ WESTLIFE'),
+              accountEmail: Text('westlife@hotmail.com'),
               decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: NetworkImage(
-                        'https://img.meituan.net/msmerchant/82e9ad59c5804de5c1eb8fc3cdca91e2686273.jpg@600w_600h_1l'),
+                    image: AssetImage("assets/Images/westlife-spectrum.png"),
                     fit: BoxFit.cover),
               ),
               currentAccountPicture: CircleAvatar(
@@ -144,49 +263,21 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: SafeArea(
-              child: ListView(
+        child: ListView(
           shrinkWrap: true,
           children: [
             Container(
               child: Column(
                 children: [
-                 
                   topTextContainer,
                   Container(
                     width: double.infinity,
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
-                        children: <Widget>[
-                          GestureDetector(
-                            child: TabbarItem('Asain Food',
-                                selectedIndex == 0 ? Colors.red : Colors.grey),
-                            onTap: () {
-                              setState(() {
-                                selectedIndex = 0;
-                              });
-                            },
-                          ),
-                          GestureDetector(
-                            child: TabbarItem('Western Food',
-                                selectedIndex == 1 ? Colors.red : Colors.grey),
-                            onTap: () {
-                              setState(() {
-                                selectedIndex = 1;
-                              });
-                            },
-                          ),
-                          GestureDetector(
-                            child: TabbarItem('Indian Food',
-                                selectedIndex == 2 ? Colors.red : Colors.grey),
-                            onTap: () {
-                              setState(() {
-                                selectedIndex = 2;
-                              });
-                            },
-                          ),
-                        ],
+                        children: buildAlbums(),
                       ),
+  
                     ),
                     margin: EdgeInsets.only(top: 20),
                   ),
@@ -203,7 +294,6 @@ class _MyHomePageState extends State<MyHomePage> {
                         VerticalDivider(width: 15),
                         Icon(Icons.today),
                         Expanded(
-                           
                             child: CupertinoTextField(
                           placeholder: 'Search Foods',
                           decoration: BoxDecoration(),
@@ -231,7 +321,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       itemWidth: MediaQuery.of(context).size.width * 0.9,
                       itemHeight: MediaQuery.of(context).size.width * 0.6,
                       autoplay: true,
-                      
+
                       // control: new SwiperControl(),
                     ),
                   ),
@@ -242,33 +332,35 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
-                            children: <Widget>[
-                              FoodCard(
-                                  title: 'Luxury Combo',
-                                  imageURLString:
-                                      'https://img.meituan.net/msmerchant/158f48dfc20a3a94595c4fc6f96102ef3641038.jpg@600w_600h_1l',
-                                  priceString: '¥398',
-                                  starString: '⭐⭐⭐⭐⭐'),
-                              FoodCard(
-                                  title: 'Caviar Sushi',
-                                  imageURLString:
-                                      'https://img.meituan.net/msmerchant/56d36cd2e9021b3ece27d760b885deaa3320018.jpg@600w_600h_1l',
-                                  priceString: '¥138',
-                                  starString: '⭐⭐⭐⭐'),
-                              FoodCard(
-                                  title: 'Tuna Sashimi',
-                                  imageURLString:
-                                      'https://img.meituan.net/msmerchant/b000b0ec4be775f5eb888f7baa0d47ba6788699.jpg@600w_600h_1l',
-                                  priceString: '¥298',
-                                  starString: '⭐⭐'),
-                              FoodCard(
-                                title: '🍣Salmon Sushi',
-                                imageURLString:
-                                    'https://img.meituan.net/msmerchant/7fe88379720ad6f039d0d852c0485f6e5001003.jpg@600w_600h_1l',
-                                priceString: '¥58',
-                                starString: '⭐⭐⭐',
-                              ),
-                            ],
+
+                            children: buildFoodCards(),
+                            // children: <Widget>[
+                            //   FoodCard(
+                            //       title: 'Luxury Combo',
+                            //       imageURLString:
+                            //           'https://img.meituan.net/msmerchant/158f48dfc20a3a94595c4fc6f96102ef3641038.jpg@600w_600h_1l',
+                            //       priceString: '¥398',
+                            //       starString: '⭐⭐⭐⭐⭐'),
+                            //   FoodCard(
+                            //       title: 'Caviar Sushi',
+                            //       imageURLString:
+                            //           'https://img.meituan.net/msmerchant/56d36cd2e9021b3ece27d760b885deaa3320018.jpg@600w_600h_1l',
+                            //       priceString: '¥138',
+                            //       starString: '⭐⭐⭐⭐'),
+                            //   FoodCard(
+                            //       title: 'Tuna Sashimi',
+                            //       imageURLString:
+                            //           'https://img.meituan.net/msmerchant/b000b0ec4be775f5eb888f7baa0d47ba6788699.jpg@600w_600h_1l',
+                            //       priceString: '¥298',
+                            //       starString: '⭐⭐'),
+                            //   FoodCard(
+                            //     title: '🍣Salmon Sushi',
+                            //     imageURLString:
+                            //         'https://img.meituan.net/msmerchant/7fe88379720ad6f039d0d852c0485f6e5001003.jpg@600w_600h_1l',
+                            //     priceString: '¥58',
+                            //     starString: '⭐⭐⭐',
+                            //   ),
+                            // ],
                           ),
                         ),
                       ),
@@ -296,6 +388,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
+
+          // ColorFiltered(colorFilter: ColorFilter.mode(Colors.blue, BlendMode.colorBurn),child: Image.asset("assets/Images/westlife-spectrum.png"),)
+
+
+// Image.asset("assets/Images/westlife-spectrum.png",colorBlendMode: ColorFilter.mode(Colors.blue, BlendMode.colorBurn),)
+
           ],
         ),
       ),
