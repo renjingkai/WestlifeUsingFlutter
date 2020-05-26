@@ -10,6 +10,7 @@ class SongCard extends StatelessWidget {
   var priceString;
   var starString;
   var introString;
+  
    SongCard({this.title,this.imageURLString,this.priceString,this.starString,this.introString});
   @override
   Widget build(BuildContext context) {
@@ -34,6 +35,7 @@ class SongCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: Colors.pink[100],
                   borderRadius: BorderRadius.circular(60),
+             
                   //  boxShadow: [BoxShadow(
                   //    color:Color.fromRGBO(255, 212, 200, 1),
                   //    offset:Offset(3,3),
@@ -49,8 +51,8 @@ class SongCard extends StatelessWidget {
             ),
             Positioned(
               child: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      '$imageURLString')),
+                  backgroundImage:  AssetImage('$imageURLString')),
+                      
               width: 120,
               height: 120,
               left: 10,

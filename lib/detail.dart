@@ -90,7 +90,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                 child: Padding(
                   padding: EdgeInsets.all(10),
                   child: CircleAvatar(
-                    backgroundImage: NetworkImage(widget.imageURLString),
+                    backgroundImage: AssetImage(widget.imageURLString),
                   ),
                 ),
               ),
@@ -144,14 +144,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                   children: <Widget>[
                     GestureDetector(
                       onTap: () {
-                        // 注册个Channel
-                        var mc = MethodChannel("renjingkaiMethodChannel");
-                        // Flutter调用Swift的swiftMethod方法，返回个Future
-                        var future = mc.invokeMethod("FlutterCallSwiftMethod", 1);
-                        //future.then返回Swift的回调
-                        future.then(
-                          (value) => print(value),
-                        );
+                     
 
                         setState(() {
                           _counter++;

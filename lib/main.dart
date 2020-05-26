@@ -82,7 +82,8 @@ class _MyHomePageState extends State<MyHomePage> {
          'We Are One',
          'Cant Lose What You Never Had'
       ],
-      'intro':"Coast to Coast is the second studio album by Irish boy band Westlife. It was also the band's second album to be released as a five-piece. It was released on 6 November 2000 by RCA Records. Five hit singles were released from the album: \"Against All Odds\", \"My Love\", \"What Makes a Man\", \"I Lay My Love on You\" and \"When You're Looking Like That\". The album was a commercial success in both Ireland and the United Kingdom, selling 1.8 million copies in Britain alone. The album was the third-best selling of 2000 in Britain.\nIn January 2005, the album was re-issued in a two-in-one box set compilation with the group's third album, World of our Own.[1] A video album, entitled Coast to Coast - Up Close and Personal, was released on 27 November 2000.[2] It peaked at number one on the UK Visual Chart and a certified 3× Platinum."
+      'intro':"Coast to Coast is the second studio album by Irish boy band Westlife. It was also the band's second album to be released as a five-piece. It was released on 6 November 2000 by RCA Records. Five hit singles were released from the album: \"Against All Odds\", \"My Love\", \"What Makes a Man\", \"I Lay My Love on You\" and \"When You're Looking Like That\". The album was a commercial success in both Ireland and the United Kingdom, selling 1.8 million copies in Britain alone. The album was the third-best selling of 2000 in Britain.\nIn January 2005, the album was re-issued in a two-in-one box set compilation with the group's third album, World of our Own.[1] A video album, entitled Coast to Coast - Up Close and Personal, was released on 27 November 2000.[2] It peaked at number one on the UK Visual Chart and a certified 3× Platinum.",
+      'albumImage':'assets/Images/coasttocoast.jpg',
     },
     {'album': 'Coast to Coast','songs': [
         'My Love',
@@ -104,7 +105,9 @@ class _MyHomePageState extends State<MyHomePage> {
         'Fragile Heart',
          'Every Little Thing You Do',
          'Dont Get Me Wrong'
-      ],'intro':"Coast to Coast is the second studio album by Irish boy band Westlife. It was also the band's second album to be released as a five-piece. It was released on 6 November 2000 by RCA Records. Five hit singles were released from the album: \"Against All Odds\", \"My Love\", \"What Makes a Man\", \"I Lay My Love on You\" and \"When You're Looking Like That\". The album was a commercial success in both Ireland and the United Kingdom, selling 1.8 million copies in Britain alone. The album was the third-best selling of 2000 in Britain.\nIn January 2005, the album was re-issued in a two-in-one box set compilation with the group's third album, World of our Own.[1] A video album, entitled Coast to Coast - Up Close and Personal, was released on 27 November 2000.[2] It peaked at number one on the UK Visual Chart and a certified 3× Platinum."},
+      ],'intro':"Coast to Coast is the second studio album by Irish boy band Westlife. It was also the band's second album to be released as a five-piece. It was released on 6 November 2000 by RCA Records. Five hit singles were released from the album: \"Against All Odds\", \"My Love\", \"What Makes a Man\", \"I Lay My Love on You\" and \"When You're Looking Like That\". The album was a commercial success in both Ireland and the United Kingdom, selling 1.8 million copies in Britain alone. The album was the third-best selling of 2000 in Britain.\nIn January 2005, the album was re-issued in a two-in-one box set compilation with the group's third album, World of our Own.[1] A video album, entitled Coast to Coast - Up Close and Personal, was released on 27 November 2000.[2] It peaked at number one on the UK Visual Chart and a certified 3× Platinum.",
+      'albumImage':'assets/Images/coasttocoast.jpg',
+      },
     {'album': 'World of Our Own','songs':[
       'Queen Of My Heart',
       'Bop Bop Baby',
@@ -125,7 +128,10 @@ class _MyHomePageState extends State<MyHomePage> {
          'Love Crime',
          'Imaginary Diva',
          'Angel (BONUS Bad Girls)',
-    ]},
+    ],
+    'albumImage':'assets/Images/worldofourown.jpg',
+    
+    },
     {'album': 'Unbreakable','songs':[
       'Swear It Again',
       'If I Let You Go',
@@ -186,17 +192,17 @@ List<Widget> buildFoodCards(){
   var songsArray = <String>[];
   songsArray = albumDict['songs'];
   var introString = albumDict['intro'];
-
+  var albumImage = albumDict['albumImage'];
   
   for (var i = 0; i < songsArray.length; i++) {
     var songTitle = songsArray[i];
    var widget = SongCard(
                                   title: songTitle,
                                   imageURLString:
-                                      'https://img.meituan.net/msmerchant/158f48dfc20a3a94595c4fc6f96102ef3641038.jpg@600w_600h_1l',
+                                      albumImage,
                                   priceString: "Song \nNo."  + (i+1).toString(),
                                   starString: '⭐⭐⭐⭐⭐',
-                                  introString: introString,);
+                                  introString: introString);
        songsWidget.add(widget);                           
   }
   
@@ -269,8 +275,7 @@ List<Widget> buildFoodCards(){
                     fit: BoxFit.cover),
               ),
               currentAccountPicture: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      'https://img.meituan.net/msmerchant/7ba8b51d8d71e254a1dfe3a2de412e19569701.jpg@600w_600h_1l')),
+                  backgroundImage: AssetImage("assets/Images/bryan.jpg")),
             ),
             ListTile(
               title: Text('UserInfo'),
