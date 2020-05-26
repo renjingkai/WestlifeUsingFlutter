@@ -3,7 +3,7 @@
 import 'package:awesome/detail.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'FoodCard.dart';
+import 'SongCard.dart';
 import 'TabbarItem.dart';
 import 'package:flutter_banner_swiper/flutter_banner_swiper.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
@@ -81,8 +81,8 @@ class _MyHomePageState extends State<MyHomePage> {
          'What I Want Is What Ive Got',
          'We Are One',
          'Cant Lose What You Never Had'
-
-      ]
+      ],
+      'intro':"Coast to Coast is the second studio album by Irish boy band Westlife. It was also the band's second album to be released as a five-piece. It was released on 6 November 2000 by RCA Records. Five hit singles were released from the album: \"Against All Odds\", \"My Love\", \"What Makes a Man\", \"I Lay My Love on You\" and \"When You're Looking Like That\". The album was a commercial success in both Ireland and the United Kingdom, selling 1.8 million copies in Britain alone. The album was the third-best selling of 2000 in Britain.\nIn January 2005, the album was re-issued in a two-in-one box set compilation with the group's third album, World of our Own.[1] A video album, entitled Coast to Coast - Up Close and Personal, was released on 27 November 2000.[2] It peaked at number one on the UK Visual Chart and a certified 3× Platinum."
     },
     {'album': 'Coast to Coast','songs': [
         'My Love',
@@ -104,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
         'Fragile Heart',
          'Every Little Thing You Do',
          'Dont Get Me Wrong'
-      ]},
+      ],'intro':"Coast to Coast is the second studio album by Irish boy band Westlife. It was also the band's second album to be released as a five-piece. It was released on 6 November 2000 by RCA Records. Five hit singles were released from the album: \"Against All Odds\", \"My Love\", \"What Makes a Man\", \"I Lay My Love on You\" and \"When You're Looking Like That\". The album was a commercial success in both Ireland and the United Kingdom, selling 1.8 million copies in Britain alone. The album was the third-best selling of 2000 in Britain.\nIn January 2005, the album was re-issued in a two-in-one box set compilation with the group's third album, World of our Own.[1] A video album, entitled Coast to Coast - Up Close and Personal, was released on 27 November 2000.[2] It peaked at number one on the UK Visual Chart and a certified 3× Platinum."},
     {'album': 'World of Our Own','songs':[
       'Queen Of My Heart',
       'Bop Bop Baby',
@@ -126,18 +126,48 @@ class _MyHomePageState extends State<MyHomePage> {
          'Imaginary Diva',
          'Angel (BONUS Bad Girls)',
     ]},
-    {'album': 'Unbreakable'},
-    {'album': 'Turnaround'},
-    {'album': 'Allow Us To Be Frank'},
+    {'album': 'Unbreakable','songs':[
+      'Swear It Again',
+      'If I Let You Go',
+      'Flying Without Wings',
+      'I Have A Dream',
+      'Fool Again',
+      'Against All Odds (With Mariah Carey)',
+      'My Love',
+      'What Makes A Man',
+      'Uptown Girl',
+      'Queen of My Heart',
+      'World of Our Own',
+      'Bop Bop Baby',
+      'When Youre Looking Like That',
+      'Unbreakable',
+      'Written In The Stars',
+      'How Does It Feel'
+    ]},
+    {'album': 'Turnaround','songs':[
+      'Mandy',
+      'Hey Whatever',
+      'Heal',
+      'Obvious',
+      'When A Woman Loves A Man',
+      'On My Shoulder',
+      'Turn Around',
+      'I Did it For You',
+      'Thank You',
+      'To Be With You'
+    ]},
+    {'album': 'Allow Us To Be Frank','songs':[
+
+    ]},
     {'album': 'Face To Face'},
   ];
 
   
   var swiperImageArray = [
-    'https://img.meituan.net/msmerchant/284c6c89e1a975d14bfb311b588772dc369418.jpg@600w_600h_1l',
-    'https://img.meituan.net/msmerchant/3a373be670fd8db23d5c461d810b5407574589.jpg@600w_600h_1l',
-    'https://img.meituan.net/msmerchant/2d7ab4b84febc3a932632d2d47be6b232610701.jpg@600w_600h_1l',
-    'https://img.meituan.net/msmerchant/2879f36120fee49a96bc937789536c433359502.jpg@600w_600h_1l',
+    'assets/Images/banner1.jpeg',
+    'assets/Images/banner2.jpeg',
+    'assets/Images/banner3.jpeg',
+    'assets/Images/banner4.jpeg',
   ];
 
   void _incrementCounter() {
@@ -155,16 +185,18 @@ List<Widget> buildFoodCards(){
   var albumDict = albumsTitleArray[selectedIndex];
   var songsArray = <String>[];
   songsArray = albumDict['songs'];
+  var introString = albumDict['intro'];
 
   
   for (var i = 0; i < songsArray.length; i++) {
     var songTitle = songsArray[i];
-   var widget = FoodCard(
+   var widget = SongCard(
                                   title: songTitle,
                                   imageURLString:
                                       'https://img.meituan.net/msmerchant/158f48dfc20a3a94595c4fc6f96102ef3641038.jpg@600w_600h_1l',
-                                  priceString: '¥398',
-                                  starString: '⭐⭐⭐⭐⭐');
+                                  priceString: "Song \nNo."  + (i+1).toString(),
+                                  starString: '⭐⭐⭐⭐⭐',
+                                  introString: introString,);
        songsWidget.add(widget);                           
   }
   
@@ -308,7 +340,7 @@ List<Widget> buildFoodCards(){
                         var imageContent = Container(
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: NetworkImage(swiperImageArray[index]),
+                                image: AssetImage(swiperImageArray[index]),
                                 fit: BoxFit.cover),
                             borderRadius: BorderRadius.circular(20),
                           ),

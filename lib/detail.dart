@@ -6,14 +6,11 @@ class DetailPage extends StatefulWidget {
   var title;
   var starString;
   var imageURLString;
-  var priceString;
-
-  // var otherP;
-  // DetailPage({Key key,this.title,this.introString}):super(key:key);
-  //  DetailPage(this.title,this.introString);
+  var numberString;
+  var descString;
 
   DetailPage(
-      {this.title, this.starString, this.imageURLString, this.priceString});
+      {this.title, this.starString, this.imageURLString, this.numberString,this.descString});
   @override
   _DetailPageState createState() => _DetailPageState();
 }
@@ -116,7 +113,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
 
                     // Text('data'),
                     Text(
-                      widget.priceString,
+                      widget.numberString,
                       style: TextStyle(
                           color: Colors.red,
                           fontSize: 20,
@@ -135,7 +132,7 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                   shrinkWrap: true,
                   children: <Widget>[
                     Text(
-                        'Mention food and drink , be that food , vegetable , fish and flesh are that Japanesque non-staple food meal burns, and the Western Europe Chinese meal popularizes also very much like not only give first place to rice, before Japan can sample to rich various meal food. Japan is a very rich countries of high grade water resource , hygiene facilities improves and perfects also very much , drinks therefore running water is in any Japanese place being able to. Modern Japan culture is furthermore colorful. Girls are in the culture studying time-honoured Japan tradition, if sado , the ikebana simultaneous, also jump disco. The scene bordering but building the browse downtown area , antiquited temple and tower is not strange. Therefore modern Japan culture is antiquited have been tied in wedlock.\n\nThat Japanese loves the birthday department who raw fish is used for food , is covering up with sashimi as a result commonly is the most popular Japan in the homeland food. The Japanese cuisine is particular about the plain taste keeping food very much , does not encourage have added a condiment, use delicate give first place to. The color to cooked food has the very good request especially face to face, not only using all kinds of form , arrangement , colour collocation that the very delicate vessel does load food, to food to have very exquisite thinking also. Be taking a look on that is so meticulous that the day style being just like landscape painting-like takes care of , sometimes cannot bear to destroy that share for the first time to Japanese visitor beautiful.'),
+                        widget.descString,style: TextStyle(fontSize: 17,letterSpacing: 1,wordSpacing: 2),),
                   ],
                 ),
               )),
@@ -165,15 +162,15 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                             borderRadius: BorderRadius.circular(22),
                             color: Color.fromRGBO(255, 212, 200, 1)),
                         padding: EdgeInsets.symmetric(horizontal: 15),
-                        width: 150,
+                        width: 120,
                         height: 44,
                         // color: Colors.lightBlue,
                         child: Row(
                           children: [
-                            Text('Add to bag'),
+                            Text(' Add',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),),
                             //自制弹簧
                             Expanded(child: SizedBox()),
-                            Icon(Icons.today)
+                            Icon(Icons.playlist_add)
                           ],
                         ),
                       ),

@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'detail.dart';
 
-class FoodCard extends StatelessWidget {
+class SongCard extends StatelessWidget {
   var title;
   var imageURLString;
   var priceString;
   var starString;
-   FoodCard({this.title,this.imageURLString,this.priceString,this.starString});
+  var introString;
+   SongCard({this.title,this.imageURLString,this.priceString,this.starString,this.introString});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -80,7 +81,7 @@ class FoodCard extends StatelessWidget {
 //The following SocketException was thrown resolving an image codec
             Positioned(
               child: Text(
-                'Japan is a very rich countries of high grade water resource , hygiene facilities improves and perfects also very much , drinks therefore running water is in any Japanese place being able to. Modern Japan culture is furthermore colorful. Girls are in the culture studying time-honoured Japan tradition, if sado , the ikebana simultaneous, also jump disco.',
+                '$introString',
                 style: TextStyle(fontSize: 13, color: Colors.grey),
                 textAlign: TextAlign.left,
                 maxLines: 3,
@@ -132,7 +133,7 @@ class FoodCard extends StatelessWidget {
            Navigator.push(context, MaterialPageRoute(builder: (ctx) {
       
          
-          return DetailPage(title:title,starString: starString,imageURLString: imageURLString,priceString: priceString,);
+          return DetailPage(title:title,starString: starString,imageURLString: imageURLString,numberString: priceString,descString: introString,);
         })).then((v){
           print(v);
         });
@@ -142,5 +143,19 @@ class FoodCard extends StatelessWidget {
 
       },
     );
+  }
+}
+
+class CircleClipper extends CustomClipper<Rect>{
+  @override
+  Rect getClip(Size size) {
+    print(size);
+    return Rect.fromLTWH(0,0, 180, 180);
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Rect> oldClipper) {
+    // TODO: implement shouldReclip
+    return true;
   }
 }
