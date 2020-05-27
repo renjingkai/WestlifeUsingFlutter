@@ -1,16 +1,10 @@
-# awesome
+# Westlife Using Flutter
 
-A new Flutter project.
+For Westlife Fans all around the world,Use Flutter to create Westlife apps run in iOS、Android、Web.
+It is a very initial versions project,I hope one day it could be Offical App.
+If you have any good idea please email me 2964451385@qq.com
+
 
 ## Getting Started
+Get Flutter Enviroments, it works in iOS、Android、Web platform。
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
