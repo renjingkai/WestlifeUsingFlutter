@@ -244,7 +244,7 @@ List<Widget> buildFoodCards(){
     
     var topTextContainer = Container(
       child: Text(
-        "Simple way to find Tasty Food",
+        "WESTLIFE We Never Say Goodbye",
         style: TextStyle(
             fontSize: 20,
             fontStyle: FontStyle.italic,
@@ -261,7 +261,7 @@ List<Widget> buildFoodCards(){
     ]);
     
     return Scaffold(
-      appBar: AppBar(title: Text('Cuisine')),
+      appBar: AppBar(title: Text('Westlife')),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.all(0),
@@ -332,7 +332,7 @@ List<Widget> buildFoodCards(){
                         Icon(Icons.today),
                         Expanded(
                             child: CupertinoTextField(
-                          placeholder: 'Search Foods',
+                          placeholder: 'Search Songs',
                           decoration: BoxDecoration(),
                         )),
                       ],
