@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+// import 'package:shared_preferen';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DetailPage extends StatefulWidget {
   var title;
@@ -10,7 +12,11 @@ class DetailPage extends StatefulWidget {
   var descString;
 
   DetailPage(
-      {this.title, this.starString, this.imageURLString, this.numberString,this.descString});
+      {this.title,
+      this.starString,
+      this.imageURLString,
+      this.numberString,
+      this.descString});
   @override
   _DetailPageState createState() => _DetailPageState();
 }
@@ -29,12 +35,49 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
     controller.addListener(() {});
   }
 
-  dynamic getFutureData(Future obj) async {
-    var realValue;
-    await obj.then(
-      (value) => realValue = value,
+
+  Future<Container> getFavouriteSongListWidget() async {
+    var list = [];
+    var textList = <Widget>[];
+
+    var index = 0;
+    var result = await getFavouriteSongs();
+    result.forEach((element) {
+ 
+      var textwidget = ListTile(
+          leading: Checkbox(
+              value: true,
+              
+              onChanged: (bool onoff) {
+                print(onoff);
+                setState(() {
+                  
+                });
+              }),
+          title: Text(element));
+      textList.add(textwidget);
+      index++;
+    });
+    return Container(
+      child: Column(children: textList),
     );
-    return realValue;
+  }
+
+  void setSongsToFavourite() async {
+    var ud = await SharedPreferences.getInstance();
+    var list = await ud.getStringList('favourite');
+    if (list == null) {
+      list = [];
+    }
+    list.add(widget.title);
+    var isSuccess = await ud.setStringList('favourite', list);
+    print(isSuccess);
+  }
+
+  Future<List<String>> getFavouriteSongs() async {
+    var ud = await SharedPreferences.getInstance();
+    var list = await ud.getStringList('favourite');
+    return list;
   }
 
   @override
@@ -132,7 +175,10 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                   shrinkWrap: true,
                   children: <Widget>[
                     Text(
-                        widget.descString,style: TextStyle(fontSize: 17,letterSpacing: 1,wordSpacing: 2),),
+                      widget.descString,
+                      style: TextStyle(
+                          fontSize: 17, letterSpacing: 1, wordSpacing: 2),
+                    ),
                   ],
                 ),
               )),
@@ -144,9 +190,8 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                   children: <Widget>[
                     GestureDetector(
                       onTap: () {
-                     
-
                         setState(() {
+                          setSongsToFavourite();
                           _counter++;
                         });
                       },
@@ -160,7 +205,11 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                         // color: Colors.lightBlue,
                         child: Row(
                           children: [
-                            Text(' Add',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 17),),
+                            Text(
+                              ' Add',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 17),
+                            ),
                             //自制弹簧
                             Expanded(child: SizedBox()),
                             Icon(Icons.playlist_add)
@@ -170,6 +219,26 @@ class _DetailPageState extends State<DetailPage> with TickerProviderStateMixin {
                     ),
                     Expanded(child: SizedBox()),
                     GestureDetector(
+                      onTap: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (BuildContext btx) {
+                              return FutureBuilder(
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<Widget> sy) {
+                                  if (sy.connectionState ==
+                                      ConnectionState.done) {
+                                    return sy.data;
+                                  } else if (sy.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return Text("Waiting");
+                                  }
+                                  return Text("data");
+                                },
+                                future: getFavouriteSongListWidget(),
+                              );
+                            });
+                      },
                       child: Container(
                         decoration: BoxDecoration(
                             color: Color.fromRGBO(255, 212, 200, 1),

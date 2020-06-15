@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   flutter_banner_swiper: ^0.1.4
   flutter_swiper : ^1.1.6
+  shared_preferences: ^0.4.2
 
 dev_dependencies:
   flutter_test:
