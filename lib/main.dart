@@ -225,7 +225,7 @@ List<Widget> buildFoodCards(){
   songsArray = albumDict['songs'];
   var introString = albumDict['intro'];
   var albumImage = albumDict['albumImage'];
-  
+  var albumNameString = albumDict['album'];
   for (var i = 0; i < songsArray.length; i++) {
     var songTitle = songsArray[i];
    var widget = SongCard(
@@ -234,7 +234,7 @@ List<Widget> buildFoodCards(){
                                       albumImage,
                                   priceString: "Song \nNo."  + (i+1).toString(),
                                   starString: '⭐⭐⭐⭐⭐',
-                                  introString: introString);
+                                  introString: introString,albumNameString: albumNameString,);
        songsWidget.add(widget);                           
   }
   

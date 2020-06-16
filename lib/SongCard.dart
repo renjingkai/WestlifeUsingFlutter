@@ -10,8 +10,8 @@ class SongCard extends StatelessWidget {
   var priceString;
   var starString;
   var introString;
-  
-   SongCard({this.title,this.imageURLString,this.priceString,this.starString,this.introString});
+  var albumNameString; 
+   SongCard({this.title,this.imageURLString,this.priceString,this.starString,this.introString,this.albumNameString});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -135,7 +135,7 @@ class SongCard extends StatelessWidget {
            Navigator.push(context, MaterialPageRoute(builder: (ctx) {
       
          
-          return DetailPage(title:title,starString: starString,imageURLString: imageURLString,numberString: priceString,descString: introString,);
+          return DetailPage(title:title,starString: starString,imageURLString: imageURLString,numberString: priceString,descString: introString,albumNameString: albumNameString,);
         })).then((v){
           print(v);
         });
